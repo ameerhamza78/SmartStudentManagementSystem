@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  webapp:
+    build:
+      context: ./SmartStudentManagementSystem
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db;Database=StudentDB;User=sa;Password=Your_password123;TrustServerCertificate=True;
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
